@@ -1,31 +1,13 @@
-// const users = require("../utils/users");
-// Firebase
-const firebase = require("../firebase/firebase");
-const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
-const axios = require("axios");
+const { authenticateUser, handleLoginResponse, handleLoginError } = require('../utils/authUtils');
+
 const login = async (req, res) => {
-    const auth = getAuth(firebase);
-    const { email, password } = req.query;
-    let access = false;
-
+    const { email:userEmail, password:userPass } = req.query;
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        console.log("USUARIO", user.email);
-
-        access = true;
-
-        return res.json({ access });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).send(err.message);
+        const currentUser = await authenticateUser(userEmail, userPass);
+        return handleLoginResponse(res, currentUser);
+    } catch (error) {
+        return handleLoginError(res, error);
     }
-
-    // users.forEach((user) => {
-    //     if (user.email === email && user.password === password) {
-    //         access = true;
-    //     }
-    // });
 };
 
 module.exports = login;
