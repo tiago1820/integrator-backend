@@ -1,16 +1,13 @@
-const users = require("../utils/users");
+const { authenticateUser, handleLoginResponse, handleLoginError } = require('../utils/authUtils');
 
-const login = (req, res) => {
-    const { email, password } = req.query;
-    let access = false;
-
-    users.forEach((user) => {
-        if (user.email === email && user.password === password) {
-            access = true;
-        }
-    });
-
-    return res.json({ access });
+const login = async (req, res) => {
+    const { email:userEmail, password:userPass } = req.query;
+    try {
+        const currentUser = await authenticateUser(userEmail, userPass);
+        return handleLoginResponse(res, currentUser);
+    } catch (error) {
+        return handleLoginError(res, error);
+    }
 };
 
 module.exports = login;
