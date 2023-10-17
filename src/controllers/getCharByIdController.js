@@ -9,7 +9,7 @@ class GetCharByIdController {
             const { id } = req.params;
             const data = await rmApi.getCharacterData(id);
             const character = rmApi.mapCharacterData(data);
-            return character.name
+            return character
                 ? responseHandler.sendSuccessResponse(res, character)
                 : responseHandler.sendErrorResponse(res, 404, "¿Disculpe, personaje no encontrado!");
         } catch (error) {
@@ -19,7 +19,6 @@ class GetCharByIdController {
 
     getTotalCharacterCount = async (req, res) => {
         try {
-            console.log("Entró en getTotalCharacterCount");
             const totalCharacterCount = await rmApi.fetchCharacterCount();
             console.log("AQUII", totalCharacterCount);
             return responseHandler.sendSuccessResponse(res, { totalCharacterCount });
