@@ -16,6 +16,17 @@ class GetCharByIdController {
             return responseHandler.sendErrorResponse(res, 500, error.message);
         }
     }
+
+    getTotalCharacterCount = async (req, res) => {
+        try {
+            console.log("Entró en getTotalCharacterCount");
+            const totalCharacterCount = await rmApi.fetchCharacterCount();
+            console.log("AQUII", totalCharacterCount);
+            return responseHandler.sendSuccessResponse(res, { totalCharacterCount });
+        } catch (error) {
+            return responseHandler.sendErrorResponse(res, 500, error.message);
+        }
+    }
 }
 
 module.exports = new GetCharByIdController();

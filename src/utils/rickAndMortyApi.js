@@ -19,6 +19,16 @@ class RickAndMortyApi {
         const character = { name, status, species, gender, origin, image };
         return character;
     }
+
+    fetchCharacterCount = async () => {
+        try {
+            const response = await axios(this.URL);
+            return response.data.info.count;
+    
+        } catch (error) {
+            throw new Error("Error fetching character count from API");
+        }
+    }
 }
 
 module.exports = RickAndMortyApi;
