@@ -1,7 +1,5 @@
 const { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } = require("firebase/auth");
 const firebase = require("../firebase/firebase");
-const ResponseHandler = require("./responseHandler");
-const responseHandler = new ResponseHandler();
 
 class FirebaseAuthenticator {
     constructor() {
