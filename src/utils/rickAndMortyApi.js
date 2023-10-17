@@ -15,8 +15,8 @@ class RickAndMortyApi {
     }
 
     mapCharacterData = (data) => {
-        const { name, status, species, gender, origin, image } = data;
-        const character = { name, status, species, gender, origin, image };
+        const { id, name, status, species, gender, origin, image } = data;
+        const character = { id, name, status, species, gender, origin, image };
         return character;
     }
 
