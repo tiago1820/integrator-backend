@@ -20,7 +20,6 @@ class GetCharByIdController {
     getTotalCharacterCount = async (req, res) => {
         try {
             const totalCharacterCount = await rmApi.fetchCharacterCount();
-            console.log("AQUII", totalCharacterCount);
             return responseHandler.sendSuccessResponse(res, { totalCharacterCount });
         } catch (error) {
             return responseHandler.sendErrorResponse(res, 500, error.message);

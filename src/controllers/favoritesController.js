@@ -16,7 +16,6 @@ class FavoritesController {
                 snapshot.forEach(doc => {
                     const favorite = doc.data();
                     favorite.uid = doc.id;
-                    console.log("UIA", favorite);
                     favorites.push(favorite);
                 });
                 return res.json(favorites);
@@ -28,12 +27,16 @@ class FavoritesController {
     };
 
     postFav = (req, res) => {
-        const {uid, id, name, status, species, gender, origin, image } = req.body;
-        const newFavorite = {uid, id, name, status, species, gender, origin, image };
+        const { id, name, status, species, gender, origin, image } = req.body;
+        const newFavorite = { id, name, status, species, gender, origin, image };
+
+        if (req.body.hasOwnProperty('uid') && req.body.uid !== undefined) {
+            newFavorite.uid = req.body.uid;
+        }
+
 
         admin.firestore().collection("favorites").add(newFavorite)
             .then(docRef => {
-                console.log("Favorito añadido con ID: ", docRef.id);
                 return this.getFavs(req, res);
             })
             .catch(error => {
@@ -48,12 +51,10 @@ class FavoritesController {
 
         admin.firestore().collection("favorites").doc(id).delete()
             .then(() => {
-                console.log(`Favorito con ID ${id} eliminado`);
                 res.set('Cache-Control', 'no-store');
                 return this.getFavs(req, res);
             })
             .catch(error => {
-                console.log(`Error al eliminar el favorito con ID ${id}:`, error);
                 return res.status(500).json({ success: false, error: error.message });
             })
 
