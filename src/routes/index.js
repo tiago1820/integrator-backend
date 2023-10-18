@@ -6,8 +6,10 @@ const AuthController = require("../controllers/authController");
 router.get("/character/count", GetCharByIdController.getTotalCharacterCount.bind(GetCharByIdController));
 router.get("/character/:id", GetCharByIdController.handle.bind(GetCharByIdController));
 
+router.get("/favs", FavoritesController.getFavs.bind(FavoritesController));
 router.post("/fav", FavoritesController.postFav.bind(FavoritesController));
 router.delete("/fav/:id", FavoritesController.deleteFav.bind(FavoritesController));
+
 
 router.get("/login", AuthController.login.bind(AuthController));
 router.get("/register", AuthController.register.bind(AuthController));
