@@ -1,4 +1,4 @@
-const CharacterService = require("../helpers/characterServiceHelper")
+const CharacterService = require("../helpers/characterService")
 
 class CharacterController {
     constructor() {
