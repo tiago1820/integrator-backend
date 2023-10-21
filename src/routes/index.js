@@ -5,7 +5,6 @@ const FavoritesController = require("../controllers/favoritesController");
 
 const favoritesController = new FavoritesController();
 
-
 // Characters
 router.get("/character/total", (req, res) => CharacterController.getTotalCharacters(req, res));
 router.get("/character/:id", (req, res) => CharacterController.getCharById(req, res));

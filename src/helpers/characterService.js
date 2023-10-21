@@ -9,7 +9,7 @@ class CharacterService {
         try {
             const { name, status, species, gender, origin, image } = (await axios(this.URL + id)).data;
             const character = { id, name, status, species, gender, origin, image };
-
+            console.log("HOLA", character);
             return character;
         } catch (error) {
             throw new Error(error.message);
