@@ -21,7 +21,8 @@ class CharacterController {
     async getTotalCharacters(req, res) {
         try {
             const totalCharacters = await this.charService.getTotalCharacter();
-            return res.json({ total: totalCharacters });
+
+            return res.status(200).json({total: totalCharacters});
         } catch (error) {
             return res.status(500).send(error.message);
         }

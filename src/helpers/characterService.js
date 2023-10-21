@@ -19,7 +19,7 @@ class CharacterService {
     async getTotalCharacter() {
         try {
             const response = await axios(this.URL);
-            return response.data.info.count;
+            return Number(response.data.info.count);
         } catch (error) {
             throw new Error(error.message);
         }
