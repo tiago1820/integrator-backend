@@ -15,6 +15,15 @@ class CharacterService {
             throw new Error(error.message);
         }
     }
+
+    async getTotalCharacter() {
+        try {
+            const response = await axios(this.URL);
+            return response.data.info.count;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
 }
 
 module.exports = CharacterService;
