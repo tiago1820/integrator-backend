@@ -3,6 +3,7 @@ const CharacterController = require("../controllers/characterController");
 const login = require("../controllers/login");
 const FavoritesController = require("../controllers/favoritesController");
 
+const characterController = new CharacterController();
 const favoritesController = new FavoritesController();
 
 // Characters

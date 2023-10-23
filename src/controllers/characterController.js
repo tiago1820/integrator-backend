@@ -29,4 +29,4 @@ class CharacterController {
     }
 }
 
-module.exports = new CharacterController();
+module.exports = CharacterController;
