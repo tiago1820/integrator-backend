@@ -43,7 +43,19 @@ describe('CharacterController', () => {
 
     });
 
-    // hacer la prueba del metodo getTotalCharacters
+    it('deberia obtener el total de personajes', async () => {
+        CharacterService.prototype.getTotalCharacter = jest.fn().mockResolvedValue(42);
 
+        const controller = new CharacterController();
+        const req = {};
+        const res = {
+            json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
+            send: jest.fn(),
+        };
 
+        await controller.getTotalCharacters(req, res);
+        expect(res.json).toHaveBeenCalledWith({ total: 42 });
+
+    });
 });
