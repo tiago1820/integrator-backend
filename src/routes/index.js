@@ -7,8 +7,8 @@ const characterController = new CharacterController();
 const favoritesController = new FavoritesController();
 
 // Characters
-router.get("/character/total", (req, res) => CharacterController.getTotalCharacters(req, res));
-router.get("/character/:id", (req, res) => CharacterController.getCharById(req, res));
+router.get("/character/total", (req, res) => characterController.getTotalCharacters(req, res));
+router.get("/character/:id", (req, res) => characterController.getCharById(req, res));
 
 // Authentication
 router.get("/login", login);
