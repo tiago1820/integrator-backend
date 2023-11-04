@@ -5,6 +5,15 @@ class CharacterController {
         this.charService = new CharacterService("https://rickandmortyapi.com/api/character/");
     }
 
+    getAllCharacters = async (req, res) => {
+        try {
+            const characters = await this.charService.getAllCharacters();
+            return res.status(200).json(characters);
+        } catch (error) {
+            return res.status(500).send(error.message);
+        }
+    }
+
     async getCharById(req, res) {
         try {
             const { id } = req.params;
@@ -22,7 +31,7 @@ class CharacterController {
         try {
             const totalCharacters = await this.charService.getTotalCharacter();
 
-            return res.status(200).json({total: totalCharacters});
+            return res.status(200).json({ total: totalCharacters });
         } catch (error) {
             return res.status(500).send(error.message);
         }

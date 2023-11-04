@@ -5,6 +5,26 @@ class CharacterService {
         this.URL = URL;
     }
 
+    getAllCharacters = async () => {
+        try {
+            let characters = [];
+            let nextPage = this.URL;
+
+            while (nextPage) {
+                const response = await axios(nextPage);
+                characters = characters.concat(response.data.results);
+                nextPage = response.data.info.next;
+            }
+
+            return characters.map(character => {
+                const { id, name, status, species, gender, origin, image } = character;
+                return { id, name, status, species, gender, origin, image };
+            });
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
     async getCharacterById(id) {
         try {
             const { name, status, species, gender, origin, image } = (await axios(this.URL + id)).data;
