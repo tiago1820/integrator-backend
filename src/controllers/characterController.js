@@ -1,5 +1,6 @@
 const CharacterService = require("../helpers/characterService")
 
+
 class CharacterController {
     constructor() {
         this.charService = new CharacterService("https://rickandmortyapi.com/api/character/");
