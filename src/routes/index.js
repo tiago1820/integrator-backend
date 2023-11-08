@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const CharacterController = require("../controllers/characterController");
 const login = require("../controllers/login");
+const postUser = require('../controllers/postUser');
 const FavoritesController = require("../controllers/favoritesController");
 
 const characterController = new CharacterController();
@@ -11,7 +12,9 @@ router.get("/character/total", (req, res) => characterController.getTotalCharact
 router.get("/character/:id", (req, res) => characterController.getCharById(req, res));
 
 // Authentication
+// router.get("/login", login);
 router.get("/login", login);
+router.post('/login', postUser);
 
 // Favorites
 router.post("/fav", (req, res) => favoritesController.postFav(req, res));
