@@ -29,7 +29,6 @@ class FavoritesController {
 
     deleteFav = async (req, res) => {
         let { id } = req.params;
-        console.log('Mi id', id);
 
         try {
             if (id) {
@@ -37,7 +36,6 @@ class FavoritesController {
                     where: { id }
                 });
                 const favs = await Favorite.findAll();
-                console.log("FAVS", favs);
 
                 // User.addFavorite(favs);
                 return res.status(201).json(favs);

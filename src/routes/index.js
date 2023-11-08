@@ -14,7 +14,7 @@ router.get("/character/:id", (req, res) => characterController.getCharById(req, 
 // Authentication
 // router.get("/login", login);
 router.get("/login", login);
-router.post('/login', postUser);
+router.post('/register', postUser);
 
 // Favorites
 router.post("/fav", (req, res) => favoritesController.postFav(req, res));
