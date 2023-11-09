@@ -7,13 +7,22 @@ class FavoritesController {
         this.favoritesService = new FavoritesService();
     }
 
+    getFav = async (req, res) => {
+        try {
+            const favs = await Favorite.findAll();
+            return res.status(200).json(favs);
+        } catch (error) {
+            return res.status(500).json({ message: error });
+        }
+    }
+
     postFav = async (req, res) => {
-        let { name, origin, status, image, species, gender } = req.body;
+        let { id, name, origin, status, image, species, gender } = req.body;
 
         try {
-            if (name && status && image && species && gender) {
+            if (id && name && status && image && species && gender) {
                 await Favorite.findOrCreate({
-                    where: { name, origin, status, image, species, gender }
+                    where: { uid: id, name, origin, status, image, species, gender }
                 });
                 const favs = await Favorite.findAll();
                 //

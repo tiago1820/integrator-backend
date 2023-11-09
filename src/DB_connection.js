@@ -19,6 +19,14 @@ const { User, Favorite } = sequelize.models;
 User.belongsToMany(Favorite, { through: "user_favorite" })
 Favorite.belongsToMany(User, { through: "user_favorite" })
 
+sequelize.sync({ force: false })// re-crear o no
+    .then(() => {
+        console.log('Tablas sincronizadas correctamente.');
+    })
+    .catch(error => {
+        console.error('Error al sincronizar las tablas:', error);
+    });
+
 module.exports = {
     User,
     Favorite,
