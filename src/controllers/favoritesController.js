@@ -20,6 +20,7 @@ class FavoritesController {
         let { id, name, origin, status, image, species, gender } = req.body;
 
         try {
+            id = String(id);
             if (id && name && status && image && species && gender) {
                 await Favorite.findOrCreate({
                     where: { uid: id, name, origin, status, image, species, gender }
