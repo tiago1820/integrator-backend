@@ -1,5 +1,5 @@
 const FavoritesService = require("../helpers/favoriteService");
-const { Favorite } = require('../DB_connection');
+const { User, Favorite } = require('../DB_connection');
 
 
 class FavoritesController {
@@ -21,13 +21,18 @@ class FavoritesController {
 
         try {
             id = String(id);
+            const userId = 1;
+            const user = await User.findByPk(userId);
+
+
+
             if (id && name && status && image && species && gender) {
                 await Favorite.findOrCreate({
                     where: { uid: id, name, origin, status, image, species, gender }
                 });
                 const favs = await Favorite.findAll();
                 //
-                //User.addFavorite(favs);
+                user.addFavorite(favs);
                 return res.status(201).json(favs);
             }
             return res.status(401).json({ message: 'Faltan datos' });
