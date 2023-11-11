@@ -21,7 +21,6 @@ class CharacterController {
             const { id } = req.params;
             const character = await this.charService.getCharacterById(id);
 
-            console.log("BATMAN", character);
 
             return character.name
                 ? res.json(character)

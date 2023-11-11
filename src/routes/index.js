@@ -17,8 +17,8 @@ router.get("/login", login);
 router.post('/register', postUser);
 
 // Favorites
-router.get("/fav", (req, res) => favoritesController.getFav(req, res));
-router.post("/fav", (req, res) => favoritesController.postFav(req, res));
-router.delete("/fav/:id", (req, res) => favoritesController.deleteFav(req, res));
+router.get("/fav/:userId", (req, res) => favoritesController.getFav(req, res));
+router.post("/fav/:userId", (req, res) => favoritesController.postFav(req, res));
+router.delete("/fav/:userId/:favoriteId", (req, res) => favoritesController.deleteFav(req, res));
 
 module.exports = router;

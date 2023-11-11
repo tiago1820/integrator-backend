@@ -18,7 +18,12 @@ server.use((req, res, next) => {
     next();
 });
 
+// En lugar de usar body-parser
 server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
+
+// server.use(express.json());
 server.use("/rickandmorty", router);
 
 module.exports = server;

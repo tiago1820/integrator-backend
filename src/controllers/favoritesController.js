@@ -8,8 +8,8 @@ class FavoritesController {
     }
 
     getFav = async (req, res) => {
+        const userId = parseInt(req.params.userId, 10);
         try {
-            const userId = 1;
             const user = await User.findByPk(userId);
 
             if (user) {
@@ -26,44 +26,43 @@ class FavoritesController {
     }
 
     postFav = async (req, res) => {
-        let { id, name, origin, status, image, species, gender } = req.body;
+        const userId = parseInt(req.params.userId, 10);
+        const { id, name, origin, status, image, species, gender } = req.body;
 
         try {
-            id = String(id);
-            const userId = 1;
             const user = await User.findByPk(userId);
-
-
-
             if (id && name && status && image && species && gender) {
+                const uid = parseInt(id, 10);
                 const [newFavorite, created] = await Favorite.findOrCreate({
-                    where: { uid: id, name, origin, status, image, species, gender },
+                    where: { uid, name, origin, status, image, species, gender },
                 });
-                // const favs = await Favorite.findAll();
-                //
+
                 await user.addFavorite(newFavorite);
                 const userFavorites = await user.getFavorites();
 
-                console.log(userFavorites)
                 return res.status(201).json(userFavorites);
             }
             return res.status(401).json({ message: 'Faltan datos' });
         } catch (error) {
+            console.error('Error al crear o asociar el favorito:', error);
             return res.status(500).json({ message: error });
         }
 
     }
 
     deleteFav = async (req, res) => {
-        let { id } = req.params;
+        const userId = parseInt(req.params.userId, 10);
+        const favoriteId = parseInt(req.params.favoriteId, 10);
+
+        console.log("USERID", userId);
+        console.log("FAVORIDID", favoriteId);
 
         try {
-            if (id) {
-                const userId = 1;
+            if (favoriteId) {
                 const user = await User.findByPk(userId);
 
                 if (user) {
-                    const favoriteToDelete = await Favorite.findByPk(id);
+                    const favoriteToDelete = await Favorite.findByPk(favoriteId);
 
                     if (favoriteToDelete) {
                         await user.removeFavorite(favoriteToDelete);
@@ -81,6 +80,7 @@ class FavoritesController {
                 return res.status(401).json({ message: 'Faltan datos' });
             }
         } catch (error) {
+            console.error('Error al eliminar el favorito:', error);
             return res.status(500).json({ message: error });
         }
     }
