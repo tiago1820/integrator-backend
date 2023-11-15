@@ -1,9 +1,11 @@
 const router = require("express").Router();
 const CharacterController = require("../controllers/characterController");
-const login = require("../controllers/login");
-const postUser = require('../controllers/postUser');
+// const login = require("../controllers/login");
+// const postUser = require('../controllers/postUser');
+const AuthController = require('../controllers/authController');
 const FavoritesController = require("../controllers/favoritesController");
 
+const authController = new AuthController();
 const characterController = new CharacterController();
 const favoritesController = new FavoritesController();
 
@@ -13,8 +15,8 @@ router.get("/character/total", (req, res) => characterController.getTotalCharact
 router.get("/character/:id", (req, res) => characterController.getCharById(req, res));
 
 // Authentication
-router.get("/login", login);
-router.post('/register', postUser);
+router.get("/login", (req, res) => authController.login(req, res));
+router.post('/register', (req, res) => authController.postUser(req, res));
 
 // Favorites
 router.get("/fav/:userId", (req, res) => favoritesController.getFav(req, res));

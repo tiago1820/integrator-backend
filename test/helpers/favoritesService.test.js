@@ -1,4 +1,4 @@
-const FavoritesService = require("../../src/helpers/favoriteService");
+const FavoritesService = require("../../src/services/favoriteService");
 
 // describe 1
 describe('FavoritesService', () => {

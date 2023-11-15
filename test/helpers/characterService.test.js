@@ -1,4 +1,4 @@
-const CharacterService = require("../../src/helpers/characterService");
+const CharacterService = require("../../src/services/characterService");
 
 // Mock para axios
 jest.mock('axios');

@@ -1,7 +1,7 @@
 const CharacterController = require('../../src/controllers/characterController');
-const CharacterService = require('../../src/helpers/characterService');
+const CharacterService = require('../../src/services/characterService');
 
-jest.mock('../../src/helpers/characterService.js');
+jest.mock('../../src/services/characterService.js');
 
 describe('CharacterController', () => {
     it('debe crear una instancia de CharacterController', () => {

@@ -1,4 +1,4 @@
-const FavoritesService = require("../helpers/favoriteService");
+const FavoritesService = require("../services/favoriteService");
 const { User, Favorite } = require('../DB_connection');
 
 
