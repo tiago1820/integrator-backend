@@ -13,7 +13,6 @@ class FavoritesController {
             const user = await User.findByPk(userId);
 
             if (user) {
-                // Utiliza el método getFavorites para obtener los favoritos del usuario
                 const userFavorites = await user.getFavorites();
 
                 return res.status(200).json(userFavorites);
