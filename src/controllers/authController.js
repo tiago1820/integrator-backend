@@ -15,6 +15,7 @@ class AuthController {
             }
             return res.status(400).json({ message: 'Faltan datos' });
         } catch (error) {
+            console.log("AQUI: ", error);
             return res.status(500).json({ message: error });
         }
     }

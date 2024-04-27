@@ -1,7 +1,5 @@
 const router = require("express").Router();
 const CharacterController = require("../controllers/characterController");
-// const login = require("../controllers/login");
-// const postUser = require('../controllers/postUser');
 const AuthController = require('../controllers/authController');
 const FavoritesController = require("../controllers/favoritesController");
 

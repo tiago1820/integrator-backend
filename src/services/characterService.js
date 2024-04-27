@@ -1,13 +1,11 @@
-const axios = require('axios');
+const { get } = require('axios');
+const { RM_API_CHARACTER } = require("../constants/index");
 
 class CharacterService {
-    constructor(URL) {
-        this.URL = URL;
-    }
 
     async getCharactersByPage(page) {
         try {
-            const response = await axios(`${this.URL}?page=${page}`);
+            const response = await get(`${RM_API_CHARACTER}?page=${page}`);
             return response.data.results;
         } catch (error) {
             throw new Error(error.message);
@@ -16,7 +14,7 @@ class CharacterService {
 
     async getCharacterById(id) {
         try {
-            const { name, status, species, gender, origin, image } = (await axios(this.URL + id)).data;
+            const { name, status, species, gender, origin, image } = (await get(RM_API_CHARACTER + id)).data;
             const character = { id, name, status, species, gender, origin, image };
             return character;
         } catch (error) {
@@ -26,7 +24,7 @@ class CharacterService {
 
     async getTotalCharacter() {
         try {
-            const response = await axios(this.URL);
+            const response = await get(RM_API_CHARACTER);
             return Number(response.data.info.count);
         } catch (error) {
             throw new Error(error.message);
